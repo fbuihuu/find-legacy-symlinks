@@ -30,8 +30,13 @@ if source /usr/lib/udev/compat-symlink-generation 2>/dev/null; then
 
     echo "This system is using comat symlink generation $COMPAT_SYMLINK_GENERATION."
 else
-    echo "Failed to retrive the compat symlink generation number, assuming generation 1."
+    echo "Failed to retrieve the compat symlink generation number, assuming generation 1."
 fi
+
+[ $UID -eq 0 ] || {
+    echo "You must be root, aborting."
+    exit 1
+}
 
 trap cleanup EXIT
 
