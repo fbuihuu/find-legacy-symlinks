@@ -62,7 +62,7 @@ for l in "${symlinks[@]}"; do
     echo " $l"
 done
 
-for tab in /etc/fstab /etc/crypttab; do
+for tab in /etc/fstab /etc/crypttab /etc/lvm.conf /proc/cmdline /etc/default/grub; do
     [ -f $tab ] || continue
 
     echo
