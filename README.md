@@ -1,20 +1,19 @@
 Legacy storage symlinks were intoduced in openSUSE distributions in the past
 either accidently or with boggus names and, for the latter case, were replaced
-later by udev upstream with (hopefully) more accurate and stable
-names. Unfortunately some systems might have been initialized with those
-incorrect names even though it is less likely with systems running Tumbleweed
-(desktops).
+later by udev upstream with more accurate and stable names. Unfortunately some
+systems might have been initialized with those incorrect names even though it is
+less likely with (desktop) systems running Tumbleweed.
 
 Given that Tumbleweed is a rolling release distribution moving fastly and
 keeping track of the most recent versions of projects, we would like to drop as
-much as specific code used to ensure backward compatibility that make openSUSE
-systemd diverge from its counterpart upstream project as we can't really
+much as specific code used to ensure backward compatibility that makes openSUSE
+systemd diverge from its upstream counterpart project as we can't really
 maintain such code forever.
 
 Hence we provide this script aimed at helping users of Tumbleweed to figure out
-whether their system is currently relying on legacy storage symlinks. If this is
-the case, the script will notify users and will list the places that will need
-to be updated.
+whether their system is currently relying on legacy storage symlinks. If it is
+the case, the script will notify the user and will list the places that will
+need to be updated. The script doesn't take any option nor argument.
 
 Please note that only `/etc/fstab` and `/etc/crypttab` configuration files are
 checked at the moment. Therefore it might possible that some (custom) scripts
