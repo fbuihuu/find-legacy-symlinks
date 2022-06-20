@@ -4,14 +4,23 @@ set -e
 
 COMPAT_SYMLINK_GENERATION_MAX=2
 
+udevadm_version=$(udevadm --version)
+
 regenerate_persistent_symlinks() {
     udevadm control --reload
-    udevadm trigger \
-            --settle \
-            --subsystem-match=block \
-            --sysname-match="nvme*" \
-            --sysname-match="sd*" \
-            --sysname-match="vd*"
+
+    # --settle is supported since v249
+    [ "$udevadm_version" -ge 249 ] &&
+	    settle="--settle"
+
+    udevadm trigger $settle \
+	    --subsystem-match=block \
+	    --sysname-match="nvme*" \
+	    --sysname-match="sd*" \
+	    --sysname-match="vd*"
+
+    [ "$settle" != "--settle" ] &&
+	    udevadm settle --timeout=10
 }
 
 cleanup() {
