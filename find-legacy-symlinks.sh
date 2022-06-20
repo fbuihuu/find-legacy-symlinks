@@ -67,21 +67,30 @@ for l in "${symlinks[@]}"; do
     echo " $l"
 done
 
-for tab in /etc/fstab /etc/crypttab /etc/lvm.conf /proc/cmdline /etc/default/grub; do
-    [ -f $tab ] || continue
+conf_files=(
+	/proc/cmdline
+	/etc/fstab
+	/etc/crypttab
+	/etc/lvm.conf
+	/etc/default/grub
+	/etc/default/grub_installdevice
+)
+
+for f in ${conf_files[*]}; do
+    [ -f $f ] || continue
 
     echo
-    echo "Checking whether they're referenced in $tab..."
+    echo "Checking whether they're referenced in $f..."
 
     for l in "${symlinks[@]}"; do
-        grep -q -e $(basename -- "$l") $tab && {
-            echo "$tab: compat symlink '$l' referenced."
+        grep -q -e $(basename -- "$l") $f && {
+            echo "$f: compat symlink '$l' referenced."
             found=true
         }
     done
 
     if ! $found; then
-        echo "Nothing found in $tab."
+        echo "Nothing found in $f."
     fi
 done
 echo
