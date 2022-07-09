@@ -85,26 +85,28 @@ conf_files=(
 	/etc/default/grub_installdevice
 )
 
+found=0
 for f in ${conf_files[*]}; do
     [ -f $f ] || continue
 
     echo
     echo "Checking whether they're referenced in $f..."
 
+    found0=$found
     for l in "${symlinks[@]}"; do
         grep -q -e $(basename -- "$l") $f && {
             echo "$f: compat symlink '$l' referenced."
-            found=true
+            let found+=1
         }
     done
 
-    if ! $found; then
+    if [ $found -eq $found0 ]; then
         echo "Nothing found in $f."
     fi
 done
 echo
 
-if $found; then
+if [ $found -gt 0 ]; then
     echo "Some references to the legacy persistent symlinks have been found. Please update the"
     echo "affected files (see above) and replace all of them."
 else
