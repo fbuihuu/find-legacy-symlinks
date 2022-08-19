@@ -94,7 +94,8 @@ for f in ${conf_files[*]}; do
 
     found0=$found
     for l in "${symlinks[@]}"; do
-        grep -q -e $(basename -- "$l") $f && {
+        # Deprecated symlink paths can start with a dash and contains spaces
+        grep -q -e "/$(basename -- "$l")" $f && {
             echo "$f: compat symlink '$l' referenced."
             let found+=1
         }
