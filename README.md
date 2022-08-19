@@ -15,16 +15,15 @@ whether their system is currently relying on legacy storage symlinks. If it is
 the case, the script will notify the user and will list the places that will
 need to be updated. The script doesn't take any option nor argument.
 
-Please note that only `/etc/fstab` and `/etc/crypttab` configuration files are
-checked at the moment. Therefore it might possible that some (custom) scripts
-might still reference the obsolete symlinks. If you have such scripts, please
-make sure to update your scripts too.
+Please note that only a couple of system configuration files are checked at the
+moment but the list cannot be exhaustive as it might possible that some (custom)
+scripts reference the obsolete symlinks. If you have such scripts, please make
+sure to update them too.
 
-Another approach to verify that your system is not relying on the legacy
-symlinks is to boot your system with `udev.compat_symlink_generation=0` option
-appended to the kernel command line. If your system still behaves as expected
-after some times then it likely means that your system is free from legacy
-symlinks.
+Another approach to verify that your system is not relying on a legacy symlink
+is to boot your system with `udev.compat_symlink_generation=0` option appended
+to the kernel command line. If your system still behaves as expected after some
+times then it likely means that your system is free from legacy symlinks.
 
 If you need further assistance, please open a bug at https://bugzilla.suse.com/
 and assign it to `systemd-maintainers@suse.de`.
