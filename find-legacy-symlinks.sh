@@ -78,11 +78,12 @@ done
 
 conf_files=(
 	/proc/cmdline
-	/etc/fstab
 	/etc/crypttab
-	/etc/lvm.conf
 	/etc/default/grub
 	/etc/default/grub_installdevice
+	/etc/fstab
+	/etc/lvm.conf
+	/etc/smartd.conf
 )
 
 found=0
