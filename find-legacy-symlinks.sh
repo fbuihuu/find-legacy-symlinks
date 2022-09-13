@@ -19,8 +19,10 @@ regenerate_persistent_symlinks() {
 	    --sysname-match="sd*" \
 	    --sysname-match="vd*"
 
-    [ "$settle" != "--settle" ] &&
-	    udevadm settle --timeout=10
+    if [ "$settle" != "--settle" ]; then
+        udevadm settle --timeout=10 ||
+            echo >&2 "udevadm settle failed, ignoring"
+    fi
 }
 
 cleanup() {
