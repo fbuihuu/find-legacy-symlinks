@@ -85,6 +85,7 @@ conf_files=(
 	/etc/default/grub_installdevice
 	/etc/fstab
 	/etc/lvm.conf
+	/etc/mdadm.conf
 	/etc/smartd.conf
 )
 
